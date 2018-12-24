@@ -6,8 +6,9 @@
 #include "CameraClass.h"
 #include "ModelClass.h"
 #include "ColorShaderClass.h"
+#include "TextureShaderClass.h"
 
-const bool FULLSCREEN = true;
+const bool FULLSCREEN = false;
 const bool VSYNC_ENABLED = true;
 const float SCREEN_DEPTH = 1000.0f;
 const float SCREEN_NEAR = 0.1f;
@@ -30,7 +31,11 @@ private:
 	D3DClass* m_D3D;
 	CameraClass* m_Camera;
 	ModelClass* m_Model;
+#if USING_TEXTURE
+	TextureShaderClass* m_TextureShader;
+#else
 	ColorShaderClass* m_ColorShader;
+#endif
 };
 
 #endif

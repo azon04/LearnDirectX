@@ -5,7 +5,11 @@ GraphicsClass::GraphicsClass()
 	m_D3D = nullptr;
 	m_Camera = nullptr;
 	m_Model = nullptr;
+#if USING_TEXTURE
+	m_TextureShader = nullptr;
+#else
 	m_ColorShader = nullptr;
+#endif
 }
 
 GraphicsClass::~GraphicsClass()
@@ -40,7 +44,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hWnd)
 	}
 
 	// Set the initial position of the camera
-	m_Camera->SetPosition(0.0f, 0.0f, -20.0f);
+	m_Camera->SetPosition(0.0f, 0.0f, -5.0f);
 
 	// Create  the model Object
 	m_Model = new ModelClass;
@@ -50,13 +54,29 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hWnd)
 	}
 
 	// Initialize the model object
-	result = m_Model->Initialize(m_D3D->GetDevice());
+	result = m_Model->Initialize(m_D3D->GetDevice(), L"./Data/test.dds");
 	if (!result)
 	{
 		MessageBox(hWnd, L"Could not initialize the model object.", L"Error", MB_OK);
 		return false;
 	}
 
+#if USING_TEXTURE
+	// Create the texture shader object
+	m_TextureShader = new TextureShaderClass;
+	if (!m_TextureShader)
+	{
+		return false;
+	}
+
+	// Initialize the texture shader object
+	result = m_TextureShader->Initialize(m_D3D->GetDevice(), hWnd);
+	if (!result)
+	{
+		MessageBox(hWnd, L"Could not initialize the texture shader object.", L"Error", MB_OK);
+		return false;
+	}
+#else
 	// Create the color shader object
 	m_ColorShader = new ColorShaderClass;
 	if (!m_ColorShader)
@@ -71,12 +91,22 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hWnd)
 		MessageBox(hWnd, L"Could not initialize the color shader object.", L"Error", MB_OK);
 		return false;
 	}
+#endif
 
 	return true;
 }
 
 void GraphicsClass::Shutdown()
 {
+#if USING_TEXTURE
+	// Release the texture shader object
+	if (m_TextureShader)
+	{
+		m_TextureShader->Shutdown();
+		delete m_TextureShader;
+		m_TextureShader = nullptr;
+	}
+#else
 	// Release the color shader object
 	if (m_ColorShader)
 	{
@@ -84,6 +114,7 @@ void GraphicsClass::Shutdown()
 		delete m_ColorShader;
 		m_ColorShader = nullptr;
 	}
+#endif
 
 	// Release the model object
 	if (m_Model)
@@ -135,12 +166,21 @@ bool GraphicsClass::Render()
 	// Put the model vertex and index buffer on the graphics pipeline to prepare them for drawing
 	m_Model->Render(m_D3D->GetDeviceContext());
 
+#if USING_TEXTURE
+	// Render the model using the texture shader
+	result = m_TextureShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_Model->GetTexture());
+	if (!result)
+	{
+		return false;
+	}
+#else
 	// Render the model using the color shader
 	result = m_ColorShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix);
 	if (!result)
 	{
 		return false;
 	}
+#endif
 
 	// Present the rendered scene to the screen
 	m_D3D->EndScene();
