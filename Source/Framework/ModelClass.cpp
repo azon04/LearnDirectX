@@ -86,12 +86,18 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 #else
 	vertices[0].color = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
 #endif
+#if USING_LIGHT
+	vertices[0].normal = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
+#endif
 
 	vertices[1].position = D3DXVECTOR3(-1.0f, 1.0f, 0.0f); // Top Left
 #if USING_TEXTURE
 	vertices[1].texture = D3DXVECTOR2(0.0f, 0.0f);
 #else
 	vertices[1].color = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
+#endif
+#if USING_LIGHT
+	vertices[1].normal = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
 #endif
 
 	vertices[2].position = D3DXVECTOR3(1.0f, -1.0f, 0.0f); // Bottom Right
@@ -100,12 +106,18 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 #else
 	vertices[2].color = D3DXVECTOR4(0.0f, 0.0f, 1.0f, 1.0f);
 #endif
+#if USING_LIGHT
+	vertices[2].normal = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
+#endif
 
 	vertices[3].position = D3DXVECTOR3(1.0f, 1.0f, 0.0f); // Top Right
 #if USING_TEXTURE
 	vertices[3].texture = D3DXVECTOR2(1.0f, 0.0f);
 #else
 	vertices[3].color = D3DXVECTOR4(0.0f, 1.0f, 1.0f, 1.0f);
+#endif
+#if USING_LIGHT
+	vertices[3].normal = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
 #endif
 
 	// Load the index array with data

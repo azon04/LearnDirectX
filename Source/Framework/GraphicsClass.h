@@ -7,6 +7,8 @@
 #include "ModelClass.h"
 #include "ColorShaderClass.h"
 #include "TextureShaderClass.h"
+#include "LightShaderClass.h"
+#include "LightClass.h"
 
 const bool FULLSCREEN = false;
 const bool VSYNC_ENABLED = true;
@@ -24,14 +26,17 @@ public:
 	bool Frame();
 
 private:
-	bool Render();
+	bool Render(float delta);
 
 private:
 
 	D3DClass* m_D3D;
 	CameraClass* m_Camera;
 	ModelClass* m_Model;
-#if USING_TEXTURE
+#if USING_LIGHT
+	LightShaderClass* m_LightShader;
+	LightClass* m_light;
+#elif USING_TEXTURE
 	TextureShaderClass* m_TextureShader;
 #else
 	ColorShaderClass* m_ColorShader;

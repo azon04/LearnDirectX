@@ -7,6 +7,7 @@
 #include <d3dx10math.h>
 
 #define USING_TEXTURE 1
+#define USING_LIGHT 1 && USING_TEXTURE
 
 #include "TextureClass.h"
 
@@ -20,6 +21,9 @@ private:
 		D3DXVECTOR2 texture;
 #else
 		D3DXVECTOR4 color;
+#endif
+#if USING_LIGHT
+		D3DXVECTOR3 normal;
 #endif
 	};
 
