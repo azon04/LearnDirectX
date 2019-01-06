@@ -5,6 +5,7 @@ ModelClass::ModelClass()
 	m_vertextBuffer = nullptr;
 	m_indexBuffer = nullptr;
 	m_texture = nullptr;
+	m_model = nullptr;
 }
 
 ModelClass::~ModelClass()
@@ -12,10 +13,17 @@ ModelClass::~ModelClass()
 
 }
 
-bool ModelClass::Initialize(ID3D11Device* device, WCHAR* textureFilename)
+bool ModelClass::Initialize(ID3D11Device* device, char* modelFileName, WCHAR* textureFilename)
 {
+	// Load in the model data
+	bool result = LoadModel(modelFileName);
+	if (!result)
+	{
+		return false;
+	}
+
 	// Initialize the vertex and index buffer that hold the geometry for the triangle
-	bool result = InitializeBuffers(device);
+	result = InitializeBuffers(device);
 	if (!result)
 	{
 		return false;
@@ -33,6 +41,8 @@ void ModelClass::Shutdown()
 
 	// Release the vertex and index buffer
 	ShutdownBuffers();
+
+	// Release the model data
 }
 
 void ModelClass::Render(ID3D11DeviceContext* deviceContext)
@@ -58,13 +68,6 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
-
-
-	// set the number of vertices in the vertex array
-	m_vertexCount = 4;
-
-	// Set the number of indices in the index array
-	m_indexCount = 6;
 	
 	// Create vertex array
 	vertices = new VertexType[m_vertexCount];
@@ -80,54 +83,19 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	}
 
 	// Load the vertex array with data
-	vertices[0].position = D3DXVECTOR3(-1.0f, -1.0f, 0.0f); // Bottom Left
+	for (int i = 0; i < m_vertexCount; i++)
+	{
+		vertices[i].position = D3DXVECTOR3(m_model[i].x, m_model[i].y, m_model[i].z);
 #if USING_TEXTURE
-	vertices[0].texture = D3DXVECTOR2(0.0f, 1.0f);
+		vertices[i].texture = D3DXVECTOR2(m_model[i].tu, m_model[i].tv);
 #else
-	vertices[0].color = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
+		vertices[i].color = D3DXVECTOR4(1.0f, 0.0f, 0.0f, 1.0f);
 #endif
 #if USING_LIGHT
-	vertices[0].normal = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
+		vertices[i].normal = D3DXVECTOR3(m_model[i].nx, m_model[i].ny, m_model[i].nz);
 #endif
-
-	vertices[1].position = D3DXVECTOR3(-1.0f, 1.0f, 0.0f); // Top Left
-#if USING_TEXTURE
-	vertices[1].texture = D3DXVECTOR2(0.0f, 0.0f);
-#else
-	vertices[1].color = D3DXVECTOR4(0.0f, 1.0f, 0.0f, 1.0f);
-#endif
-#if USING_LIGHT
-	vertices[1].normal = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
-#endif
-
-	vertices[2].position = D3DXVECTOR3(1.0f, -1.0f, 0.0f); // Bottom Right
-#if USING_TEXTURE
-	vertices[2].texture = D3DXVECTOR2(1.0f, 1.0f);
-#else
-	vertices[2].color = D3DXVECTOR4(0.0f, 0.0f, 1.0f, 1.0f);
-#endif
-#if USING_LIGHT
-	vertices[2].normal = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
-#endif
-
-	vertices[3].position = D3DXVECTOR3(1.0f, 1.0f, 0.0f); // Top Right
-#if USING_TEXTURE
-	vertices[3].texture = D3DXVECTOR2(1.0f, 0.0f);
-#else
-	vertices[3].color = D3DXVECTOR4(0.0f, 1.0f, 1.0f, 1.0f);
-#endif
-#if USING_LIGHT
-	vertices[3].normal = D3DXVECTOR3(0.0f, 0.0f, -1.0f);
-#endif
-
-	// Load the index array with data
-	indices[0] = 0;
-	indices[1] = 1;
-	indices[2] = 2;
-
-	indices[3] = 2;
-	indices[4] = 1;
-	indices[5] = 3;
+		indices[i] = i;
+	}
 
 	// Set the description of the static vertex buffer
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -234,5 +202,73 @@ void ModelClass::ReleaseTexture()
 		m_texture->Shutdown();
 		delete m_texture;
 		m_texture = nullptr;
+	}
+}
+
+bool ModelClass::LoadModel(char* modelFileName)
+{
+	ifstream fin;
+	char input;
+	int i;
+
+	// open model file
+	fin.open(modelFileName);
+
+	// if it couldnot open the file then exit
+	if (fin.fail())
+	{
+		return false;
+	}
+
+	// Read up to the value of vertex count
+	fin.get(input);
+	while (input != ':')
+	{
+		fin.get(input);
+	}
+
+	// Read the vertex count
+	fin >> m_vertexCount;
+
+	// Set the number or indices to be the same as the vertex count
+	m_indexCount = m_vertexCount;
+
+	// Create the model using the vertex count that was read in
+	m_model = new ModelType[m_vertexCount];
+	if (!m_model)
+	{
+		return false;
+	}
+
+	// Read up to the beginning of the data
+	fin.get(input);
+	while (input != ':')
+	{
+		fin.get(input);
+	}
+	fin.get(input);
+	fin.get(input);
+
+	// Read in the vertex data
+	for (i = 0; i < m_vertexCount; i++)
+	{
+		fin >> m_model[i].x >> m_model[i].y >> m_model[i].z;
+		fin >> m_model[i].tu >> m_model[i].tv;
+		fin >> m_model[i].nx >> m_model[i].ny >> m_model[i].nz;
+	}
+
+	// Close the model file
+	fin.close();
+
+	return true;
+
+}
+
+void ModelClass::ReleaseModel()
+{
+	if (m_model)
+	{
+		delete[] m_model;
+		m_model = 0;
 	}
 }

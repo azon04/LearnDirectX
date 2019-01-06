@@ -6,6 +6,9 @@
 #include <d3d11.h>
 #include <d3dx10math.h>
 
+#include <fstream>
+using namespace std;
+
 #define USING_TEXTURE 1
 #define USING_LIGHT 1 && USING_TEXTURE
 
@@ -27,11 +30,18 @@ private:
 #endif
 	};
 
+	struct ModelType
+	{
+		float x, y, z;
+		float tu, tv;
+		float nx, ny, nz;
+	};
+
 public:
 	ModelClass();
 	~ModelClass();
 
-	bool Initialize(ID3D11Device* device, WCHAR* textureFilename);
+	bool Initialize(ID3D11Device* device, char* modelFilename, WCHAR* textureFilename);
 	void Shutdown();
 	void Render(ID3D11DeviceContext* deviceContext);
 
@@ -47,11 +57,15 @@ private:
 	bool LoadTexture(ID3D11Device* device, WCHAR* filename);
 	void ReleaseTexture();
 
+	bool LoadModel(char* modelFileName);
+	void ReleaseModel();
+
 private:
 	ID3D11Buffer *m_vertextBuffer, *m_indexBuffer;
 	int m_vertexCount, m_indexCount;
 
 	TextureClass* m_texture;
+	ModelType* m_model;
 };
 
 #endif
