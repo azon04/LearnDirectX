@@ -87,8 +87,9 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hWnd)
 	}
 
 	// Initialize the light object
+	m_light->SetAmbientColor(0.15f, 0.15f, 0.15f, 1.0f);
 	m_light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
-	m_light->SetDirection(0.0f, 0.0f, 1.0f);
+	m_light->SetDirection(1.0f, 0.0f, 0.0f);
 
 #elif USING_TEXTURE
 	// Create the texture shader object
@@ -225,7 +226,8 @@ bool GraphicsClass::Render(float delta)
 
 #if USING_LIGHT
 	// Render the model using the light shader
-	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_Model->GetTexture(), m_light->GetDirection(), m_light->GetDiffuseColor());
+	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_Model->GetTexture(), 
+		m_light->GetDirection(), m_light->GetAmbientColor(), m_light->GetDiffuseColor());
 	if (!result)
 	{
 		return false;
