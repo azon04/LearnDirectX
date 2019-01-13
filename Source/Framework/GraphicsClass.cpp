@@ -57,7 +57,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hWnd)
 	}
 
 	// Initialize the model object
-	result = m_Model->Initialize(m_D3D->GetDevice(), "./Data/CubeRes.txt", L"./Data/seafloor.dds");
+	result = m_Model->Initialize(m_D3D->GetDevice(), "./Data/Cube.txt", L"./Data/seafloor.dds");
 	if (!result)
 	{
 		MessageBox(hWnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -89,7 +89,9 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hWnd)
 	// Initialize the light object
 	m_light->SetAmbientColor(0.15f, 0.15f, 0.15f, 1.0f);
 	m_light->SetDiffuseColor(1.0f, 1.0f, 1.0f, 1.0f);
-	m_light->SetDirection(1.0f, 0.0f, 0.0f);
+	m_light->SetDirection(0.0f, 0.0f, 1.0f);
+	m_light->SetSpecularColor(1.0f, 1.0f, 1.0f, 1.0f);
+	m_light->SetSpecularPower(32.0f);
 
 #elif USING_TEXTURE
 	// Create the texture shader object
@@ -227,7 +229,8 @@ bool GraphicsClass::Render(float delta)
 #if USING_LIGHT
 	// Render the model using the light shader
 	result = m_LightShader->Render(m_D3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_Model->GetTexture(), 
-		m_light->GetDirection(), m_light->GetAmbientColor(), m_light->GetDiffuseColor());
+		m_light->GetDirection(), m_light->GetAmbientColor(), m_light->GetDiffuseColor(),
+		m_Camera->GetPosition(), m_light->GetSpecularColor(), m_light->GetSpecularPower());
 	if (!result)
 	{
 		return false;
