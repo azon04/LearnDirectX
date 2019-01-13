@@ -41,5 +41,27 @@ project "DirectXTutorial"
     filter "configurations:Release"
         defines { "NDEBUG" }
         optimize "On"
+
+group "Tools"
+
+project "ObjParser"
+    location ("Projects/".. _ACTION .. "/Tools" )
+    kind "ConsoleApp"
+    language "C++"
+    
+    targetdir "Binaries/Tools"
+
+    files { "Tools/ObjParser/*.h",
+            "Tools/ObjParser/*.cpp" }
+    
+    debugdir "./"
+
+    filter "configurations:Debug"
+        defines { "DEBUG" }
+        symbols "On"
+    
+    filter "configurations:Release"
+        defines { "NDEBUG" }
+        optimize "On"
     
     
