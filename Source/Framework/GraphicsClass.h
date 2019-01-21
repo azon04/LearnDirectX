@@ -9,6 +9,7 @@
 #include "TextureShaderClass.h"
 #include "LightShaderClass.h"
 #include "LightClass.h"
+#include "BitmapClass.h"
 
 const bool FULLSCREEN = false;
 const bool VSYNC_ENABLED = true;
@@ -33,14 +34,15 @@ private:
 	D3DClass* m_D3D;
 	CameraClass* m_Camera;
 	ModelClass* m_Model;
+	TextureShaderClass* m_TextureShader;
 #if USING_LIGHT
 	LightShaderClass* m_LightShader;
 	LightClass* m_light;
-#elif USING_TEXTURE
-	TextureShaderClass* m_TextureShader;
 #else
 	ColorShaderClass* m_ColorShader;
 #endif
+
+	BitmapClass* m_Bitmap;
 };
 
 #endif
