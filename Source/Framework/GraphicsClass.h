@@ -10,6 +10,7 @@
 #include "LightShaderClass.h"
 #include "LightClass.h"
 #include "BitmapClass.h"
+#include "TextClass.h"
 
 const bool FULLSCREEN = false;
 const bool VSYNC_ENABLED = true;
@@ -43,6 +44,7 @@ private:
 #endif
 
 	BitmapClass* m_Bitmap;
+	TextClass* m_Text;
 };
 
 #endif

@@ -13,6 +13,7 @@ GraphicsClass::GraphicsClass()
 	m_ColorShader = nullptr;
 #endif
 	m_Bitmap = nullptr;
+	m_Text = nullptr;
 }
 
 GraphicsClass::~GraphicsClass()
@@ -23,6 +24,7 @@ GraphicsClass::~GraphicsClass()
 bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hWnd)
 {
 	bool result = false;
+	D3DXMATRIX baseViewMatrix;
 
 	// Create Direct3D object
 	m_D3D = new D3DClass;
@@ -45,6 +47,11 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hWnd)
 	{
 		return false;
 	}
+
+	// Initialize a base view matrix with the camera for 2D user interface rendering
+	m_Camera->SetPosition(0.0f, 0.0f, -1.0f);
+	m_Camera->Render();
+	m_Camera->GetViewMatrix(baseViewMatrix);
 
 	// Set the initial position of the camera
 	m_Camera->SetPosition(0.0f, 0.0f, -5.0f);
@@ -138,12 +145,34 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hWnd)
 		return false;
 	}
 
+	// Create the text object
+	m_Text = new TextClass;
+	if (!m_Text)
+	{
+		return false;
+	}
+
+	// Initialize the text object
+	result = m_Text->Initialize(m_D3D->GetDevice(), m_D3D->GetDeviceContext(), hWnd, screenWidth, screenHeight, baseViewMatrix);
+	if (!result)
+	{
+		MessageBox(hWnd, L"Could not initialize the text object.", L"Error", MB_OK);
+		return false;
+	}
+
 	return true;
 }
 
 void GraphicsClass::Shutdown()
 {
 	// Release the bitmap object
+	if (m_Text)
+	{
+		m_Text->Shutdown();
+		delete m_Text;
+		m_Text = nullptr;
+	}
+
 	if (m_Bitmap)
 	{
 		m_Bitmap->Shutdown();
@@ -277,7 +306,7 @@ bool GraphicsClass::Render(float delta)
 
 	// reset world Matrix
 	m_D3D->GetWorldMatrix(worldMatrix);
-
+#if 0
 	// Put the bitmap vertex and index buffers on the graphics pipeline to prepare them for drawing
 	result = m_Bitmap->Render(m_D3D->GetDeviceContext(), 100, 100);
 	if (!result)
@@ -291,6 +320,20 @@ bool GraphicsClass::Render(float delta)
 	{
 		return false;
 	}
+#endif
+	// Render text
+	// Turn on the alpha blending before rendering the text
+	m_D3D->TurnOnAlphaBlending();
+
+	// Render the text strings
+	result = m_Text->Render(m_D3D->GetDeviceContext(), worldMatrix, orthoMatrix);
+	if (!result)
+	{
+		return false;
+	}
+
+	// Turn off the alpha blending after rendering the text
+	m_D3D->TurnOffAlphaBlending();
 
 	// Turn the Z buffer back on now that all 2D rendering has completed
 	m_D3D->TurnZBufferOn();
