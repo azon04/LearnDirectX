@@ -139,7 +139,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hWnd)
 	}
 
 	// Initialize the bitmap object
-	result = m_Bitmap->Initialize(m_D3D->GetDevice(), screenWidth, screenHeight, L"./Data/seafloor.dds", 256, 256);
+	result = m_Bitmap->Initialize(m_D3D->GetDevice(), screenWidth, screenHeight, L"./Data/Arrow.dds", 32, 32);
 	if (!result)
 	{
 		return false;
@@ -237,7 +237,7 @@ void GraphicsClass::Shutdown()
 	}
 }
 
-bool GraphicsClass::Frame()
+bool GraphicsClass::Frame(int mouseX, int mouseY, InputClass* input)
 {
 	static float rotation = 0.0f;
 	
@@ -248,12 +248,27 @@ bool GraphicsClass::Frame()
 		rotation -= 360.0f;
 	}
 
+	bool result;
+	
+	// Set the location of the mouse
+	result = m_Text->SetMousePosition(mouseX, mouseY, m_D3D->GetDeviceContext());
+	if (!result)
+	{
+		return false;
+	}
+
+	result = m_Text->SetPrintBuffer(input, m_D3D->GetDeviceContext());
+	if (!result)
+	{
+		return false;
+	}
+
 	// Render the graphics scene
-	bool result = Render(rotation);
+	result = Render(rotation, mouseX, mouseY);
 	return result;
 }
 
-bool GraphicsClass::Render(float delta)
+bool GraphicsClass::Render(float delta, int mouseX, int mouseY)
 {
 	D3DXMATRIX viewMatrix, projectionMatrix, worldMatrix, orthoMatrix;
 	bool result;
@@ -303,12 +318,15 @@ bool GraphicsClass::Render(float delta)
 
 	// Turn off the Z buffer to begin all 2D rendering
 	m_D3D->TurnZBufferOff();
+	
+	// Turn on the alpha blending before rendering the text
+	m_D3D->TurnOnAlphaBlending();
 
 	// reset world Matrix
 	m_D3D->GetWorldMatrix(worldMatrix);
-#if 0
+
 	// Put the bitmap vertex and index buffers on the graphics pipeline to prepare them for drawing
-	result = m_Bitmap->Render(m_D3D->GetDeviceContext(), 100, 100);
+	result = m_Bitmap->Render(m_D3D->GetDeviceContext(), mouseX, mouseY);
 	if (!result)
 	{
 		return false;
@@ -320,11 +338,8 @@ bool GraphicsClass::Render(float delta)
 	{
 		return false;
 	}
-#endif
-	// Render text
-	// Turn on the alpha blending before rendering the text
-	m_D3D->TurnOnAlphaBlending();
 
+	// Render text
 	// Render the text strings
 	result = m_Text->Render(m_D3D->GetDeviceContext(), worldMatrix, orthoMatrix);
 	if (!result)

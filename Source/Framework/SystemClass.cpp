@@ -34,7 +34,12 @@ bool SystemClass::Initialize()
 	}
 
 	// Initialize the input object
-	m_input->Initialize();
+	result = m_input->Initialize(m_hInstance, m_hwnd, screenWidth, screenHeight);
+	if (!result)
+	{
+		MessageBox(m_hwnd, L"Could not initialize the input object", L"Error", MB_OK);
+		return false;
+	}
 
 	// Create the graphics object. This object will handle rendering all the graphics for this application
 	m_graphics = new GraphicsClass;
@@ -62,6 +67,7 @@ void SystemClass::Shutdown()
 	// Release the input object
 	if (m_input)
 	{
+		m_input->Shutdown();
 		delete m_input;
 		m_input = nullptr;
 	}
@@ -105,25 +111,17 @@ void SystemClass::Run()
 				done = true;
 			}
 		}
+
+		// Check if the user pressed escape and wants to quit
+		if (m_input->IsEscapePressed())
+		{
+			done = true;
+		}
 	}
 }
 
 LRESULT CALLBACK SystemClass::MessageHandler(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	// sort though and find that code to run for the message given
-	switch (message)
-	{
-		// Check if a key has been pressed on the keyboard
-		case WM_KEYDOWN:
-			m_input->KeyDown((unsigned int)wParam);
-			return 0;
-		
-		// Check if a key has been released on the keyboard
-		case WM_KEYUP:
-			m_input->KeyUp((unsigned int)wParam);
-			return 0;
-	}
-
 	// Handle any message the switch statement didn't handle
 	return DefWindowProc(hWnd, message, wParam, lParam);
 }
@@ -131,15 +129,20 @@ LRESULT CALLBACK SystemClass::MessageHandler(HWND hWnd, UINT message, WPARAM wPa
 bool SystemClass::Frame()
 {
 	bool result;
+	int mouseX, mouseY;
 
-	// Check if the user pressed escape and wants to exit the application
-	if (m_input->IsKeyDown(VK_ESCAPE))
+	// Do the input frame processing
+	result = m_input->Frame();
+	if (!result)
 	{
 		return false;
 	}
 
+	// Get the location of the mouse from the input object
+	m_input->GetMouseLocation(mouseX, mouseY);
+
 	// Do the frame processing for the graphics object
-	result = m_graphics->Frame();
+	result = m_graphics->Frame(mouseX, mouseY, m_input);
 
 	return result;
 }

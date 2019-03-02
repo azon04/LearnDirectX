@@ -3,6 +3,7 @@
 
 #include "FontClass.h"
 #include "FontShaderClass.h"
+#include "InputClass.h"
 
 class TextClass
 {
@@ -27,6 +28,8 @@ public:
 	bool Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, HWND hwnd, int screenWidth, int screenHeight, D3DXMATRIX baseViewMatrix);
 	void Shutdown();
 	bool Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX orthoMatrix);
+	bool SetMousePosition(int mouseX, int mouseY, ID3D11DeviceContext* deviceContext);
+	bool SetPrintBuffer(InputClass* inputBuffer, ID3D11DeviceContext* deviceContext);
 
 private:
 	bool InitializeSentence(SentenceType** sentence, int maxLength, ID3D11Device* device);
@@ -42,5 +45,6 @@ private:
 
 	SentenceType* m_sentence1;
 	SentenceType* m_sentence2;
+	SentenceType* m_sentence3;
 };
 #endif

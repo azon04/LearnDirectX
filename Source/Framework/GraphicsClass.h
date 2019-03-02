@@ -11,6 +11,7 @@
 #include "LightClass.h"
 #include "BitmapClass.h"
 #include "TextClass.h"
+#include "InputClass.h"
 
 const bool FULLSCREEN = false;
 const bool VSYNC_ENABLED = true;
@@ -25,10 +26,10 @@ public:
 
 	bool Initialize(int, int, HWND);
 	void Shutdown();
-	bool Frame();
+	bool Frame(int mouseX, int mouseY, InputClass* input);
 
 private:
-	bool Render(float delta);
+	bool Render(float delta, int mouseX, int mouseY);
 
 private:
 

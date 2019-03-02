@@ -83,6 +83,20 @@ bool TextClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCont
 		return false;
 	}
 
+	// Initialize the third sentence
+	result = InitializeSentence(&m_sentence3, 16, device);
+	if (!result)
+	{
+		return false;
+	}
+
+	// Now update the sentence vertex buffer with the new string information
+	result = UpdateSentence(m_sentence3, "Goodbye", 100, 200, 1.0f, 1.0f, 0.0f, deviceContext);
+	if (!result)
+	{
+		return false;
+	}
+
 	return true;
 }
 
@@ -124,6 +138,74 @@ bool TextClass::Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatri
 
 	// Draw the second sentence
 	result = RenderSentence(deviceContext, m_sentence2, worldMatrix, orthoMatrix);
+	if (!result)
+	{
+		return false;
+	}
+
+	// Draw the third sentence
+	result = RenderSentence(deviceContext, m_sentence3, worldMatrix, orthoMatrix);
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool TextClass::SetMousePosition(int mouseX, int mouseY, ID3D11DeviceContext* deviceContext)
+{
+	char tempStr[16];
+	char mouseString[16];
+	bool result;
+
+	// Convert mouseX integer to string format
+	_itoa_s(mouseX, tempStr, 10);
+
+	// Setup the mouseX string
+	strcpy_s(mouseString, "Mouse X:");
+	strcat_s(mouseString, tempStr);
+
+	// Update the sentence vertex buffer with the new string information
+	result = UpdateSentence(m_sentence1, mouseString, 20, 20, 1.0f, 1.0f, 1.0f, deviceContext);
+	if (!result)
+	{
+		return false;
+	}
+
+	// Convert mouseY integer to string format
+	_itoa_s(mouseY, tempStr, 10);
+
+	// Setup the mouseY string
+	strcpy_s(mouseString, "Mouse Y:");
+	strcat_s(mouseString, tempStr);
+
+	// Update the sentence vertex buffer with the new string information
+	result = UpdateSentence(m_sentence2, mouseString, 20, 40, 1.0f, 1.0f, 1.0f, deviceContext);
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool TextClass::SetPrintBuffer(InputClass* input, ID3D11DeviceContext* deviceContext)
+{
+	char temp[16];
+	int charIndex = 2;
+	temp[0] = 'k';
+	temp[1] = ':';
+	for (int i = 0; i < 256; i++)
+	{
+		if (input->IsKeyPressed(i))
+		{
+			temp[charIndex++] = MapVirtualKey(i, MAPVK_VSC_TO_VK);
+		}
+	}
+
+	temp[charIndex] = '\0';
+	bool result = UpdateSentence(m_sentence3, temp, 20, 60, 1.0f, 1.0f, 1.0f, deviceContext);
 	if (!result)
 	{
 		return false;
