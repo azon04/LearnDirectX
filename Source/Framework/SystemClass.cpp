@@ -4,6 +4,7 @@ SystemClass::SystemClass()
 {
 	m_input = nullptr;
 	m_graphics = nullptr;
+	m_Sound = nullptr;
 }
 
 SystemClass::SystemClass(const SystemClass&)
@@ -50,12 +51,38 @@ bool SystemClass::Initialize()
 
 	// Initialize the graphic object
 	result = m_graphics->Initialize(screenWidth, screenHeight, m_hwnd);
+	if (!result)
+	{
+		return false;
+	}
+
+	// Create the sound object
+	m_Sound = new SoundClass;
+	if (!m_Sound)
+	{
+		return false;
+	}
+
+	// Initialize the sound object
+	result = m_Sound->Initialize(m_hwnd);
+	if (!result)
+	{
+		MessageBox(m_hwnd, L"Could not initialize Direct Sound", L"Error", MB_OK);
+		return false;
+	}
 
 	return result;
 }
 
 void SystemClass::Shutdown()
 {
+	// Release the sound object
+	if (m_Sound)
+	{
+		m_Sound->Shutdown();
+		delete m_Sound;
+		m_Sound = false;
+	}
 	// Release the graphic object
 	if (m_graphics)
 	{

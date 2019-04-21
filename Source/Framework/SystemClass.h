@@ -5,6 +5,7 @@
 
 #include "InputClass.h"
 #include "GraphicsClass.h"
+#include "SoundClass.h"
 
 class SystemClass
 {
@@ -31,6 +32,7 @@ private:
 
 	InputClass* m_input;
 	GraphicsClass* m_graphics;
+	SoundClass* m_Sound;
 };
 
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
