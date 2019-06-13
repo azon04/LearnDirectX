@@ -30,6 +30,8 @@ public:
 	bool Render(ID3D11DeviceContext* deviceContext, D3DXMATRIX worldMatrix, D3DXMATRIX orthoMatrix);
 	bool SetMousePosition(int mouseX, int mouseY, ID3D11DeviceContext* deviceContext);
 	bool SetPrintBuffer(InputClass* inputBuffer, ID3D11DeviceContext* deviceContext);
+	bool SetFPS(int fps, ID3D11DeviceContext* deviceContext);
+	bool SetCPU(int cpu, ID3D11DeviceContext* deviceContext);
 
 private:
 	bool InitializeSentence(SentenceType** sentence, int maxLength, ID3D11Device* device);
