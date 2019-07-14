@@ -32,6 +32,7 @@ public:
 	bool SetPrintBuffer(InputClass* inputBuffer, ID3D11DeviceContext* deviceContext);
 	bool SetFPS(int fps, ID3D11DeviceContext* deviceContext);
 	bool SetCPU(int cpu, ID3D11DeviceContext* deviceContext);
+	bool SetRenderCount(int renderCount, ID3D11DeviceContext* deviceContext);
 
 private:
 	bool InitializeSentence(SentenceType** sentence, int maxLength, ID3D11Device* device);

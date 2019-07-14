@@ -162,6 +162,16 @@ bool InputClass::IsKeyPressed(int keyCode)
 	return m_keyboardState[keyCode] & 0x80;
 }
 
+bool InputClass::IsLeftArrowPressed()
+{
+	return m_keyboardState[DIK_LEFTARROW] & 0x80;
+}
+
+bool InputClass::IsRightArrowPressed()
+{
+	return m_keyboardState[DIK_RIGHTARROW] & 0x80;
+}
+
 bool InputClass::ReadKeyboard()
 {
 	HRESULT result;

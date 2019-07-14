@@ -270,7 +270,6 @@ bool TextClass::SetFPS(int fps, ID3D11DeviceContext* deviceContext)
 
 bool TextClass::SetCPU(int cpu, ID3D11DeviceContext* deviceContext)
 {
-
 	char tempString[16];
 	char cpuString[16];
 	bool result;
@@ -285,6 +284,29 @@ bool TextClass::SetCPU(int cpu, ID3D11DeviceContext* deviceContext)
 
 	// Update the sentence vertex buffer with the new string information
 	result = UpdateSentence(m_sentence2, cpuString, 20, 40, 0.0f, 1.0f, 0.0f, deviceContext);
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool TextClass::SetRenderCount(int renderCount, ID3D11DeviceContext* deviceContext)
+{
+	char tempString[16];
+	char countString[16];
+	bool result;
+
+	// Convert the cpu integer to string format
+	_itoa_s(renderCount, tempString, 10);
+
+	// Setup the cpu string
+	strcpy_s(countString, "Count: ");
+	strcat_s(countString, tempString);
+
+	// Update the sentence vertex buffer with the new string information
+	result = UpdateSentence(m_sentence3, countString, 20, 60, 0.0f, 1.0f, 0.0f, deviceContext);
 	if (!result)
 	{
 		return false;

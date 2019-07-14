@@ -9,6 +9,7 @@
 #include "FPSClass.h"
 #include "CPUClass.h"
 #include "TimerClass.h"
+#include "PositionClass.h"
 
 class SystemClass
 {
@@ -40,6 +41,8 @@ private:
 	FPSClass* m_FPS;
 	CPUClass* m_CPU;
 	TimerClass* m_Timer;
+
+	PositionClass* m_Position;
 };
 
 static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);

@@ -12,6 +12,8 @@
 #include "BitmapClass.h"
 #include "TextClass.h"
 #include "InputClass.h"
+#include "FrustumClass.h"
+#include "ModelListClass.h"
 
 const bool FULLSCREEN = false;
 const bool VSYNC_ENABLED = true;
@@ -26,9 +28,7 @@ public:
 
 	bool Initialize(int, int, HWND);
 	void Shutdown();
-	bool Frame(int fps, int cpu, float frameTime);
-
-private:
+	bool Frame(int fps, int cpu, float frameTime, float rotationY);
 	bool Render(float delta, int mouseX, int mouseY);
 
 private:
@@ -46,6 +46,9 @@ private:
 
 	BitmapClass* m_Bitmap;
 	TextClass* m_Text;
+
+	ModelListClass* m_ModelList;
+	FrustumClass* m_Frustum;
 };
 
 #endif

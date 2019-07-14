@@ -8,6 +8,7 @@ SystemClass::SystemClass()
 	m_FPS = nullptr;
 	m_CPU = nullptr;
 	m_Timer = 0;
+	m_Position = nullptr;
 }
 
 SystemClass::SystemClass(const SystemClass&)
@@ -107,11 +108,25 @@ bool SystemClass::Initialize()
 		return false;
 	}
 
+	// Create the position object
+	m_Position = new PositionClass;
+	if (!m_Position)
+	{
+		return false;
+	}
+
 	return result;
 }
 
 void SystemClass::Shutdown()
 {
+	// Release the position object
+	if (m_Position)
+	{
+		delete m_Position;
+		m_Position = nullptr;
+	}
+
 	// Release the timer object
 	if (m_Timer)
 	{
@@ -215,6 +230,8 @@ bool SystemClass::Frame()
 {
 	bool result;
 	int mouseX, mouseY;
+	bool keyDown;
+	float rotationY;
 
 	// Update the system stats
 	m_Timer->Frame();
@@ -228,11 +245,35 @@ bool SystemClass::Frame()
 		return false;
 	}
 
+	// Set the frame time for calculating the updated position
+	m_Position->SetFrameTime(m_Timer->GetTime());
+
+	// Check if the left and right arrow key has been pressed, if so rotate the camera accordingly
+	keyDown = m_input->IsLeftArrowPressed();
+	m_Position->TurnLeft(keyDown);
+
+	keyDown = m_input->IsRightArrowPressed();
+	m_Position->TurnRight(keyDown);
+
 	// Get the location of the mouse from the input object
 	m_input->GetMouseLocation(mouseX, mouseY);
 
+	// Get the current view point rotation
+	m_Position->GetRotation(rotationY);
+
 	// Do the frame processing for the graphics object
-	result = m_graphics->Frame(m_FPS->GetFPS(), m_CPU->GetCPUPercentage() , m_Timer->GetTime());
+	result = m_graphics->Frame(m_FPS->GetFPS(), m_CPU->GetCPUPercentage() , m_Timer->GetTime(), rotationY);
+	if (!result)
+	{
+		return false;
+	}
+	
+	// Render the graphics to the screen
+	result = m_graphics->Render(m_Timer->GetTime(), mouseX, mouseY);
+	if (!result)
+	{
+		return false;
+	}
 
 	return result;
 }
