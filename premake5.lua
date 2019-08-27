@@ -10,24 +10,10 @@ newaction {
 }
 
 workspace "DirectXTutorial"
-    location ("Projects/" .. _ACTION)
+    location ("./")
     configurations { "Debug", "Release" }
 
-project "DirectXTutorial"
-    location ("Projects/".. _ACTION .."/DirectXTutorial")
-    kind "WindowedApp"
-    language "C++"
-    
-    targetdir "Binaries/%{cfg.buildcfg}"
-    
-    files { "Source/*.h", 
-            "Source/*.cpp",
-            "Source/Framework/*.h",
-            "Source/Framework/*.cpp" 
-        }
-
-    debugdir "./"
-
+function setup_project()
     -- TODO this might want to group as library definition
     directSDKPath = os.getenv( "DXSDK_DIR" )
     sysincludedirs { directSDKPath.."Include" }
@@ -41,6 +27,50 @@ project "DirectXTutorial"
     filter "configurations:Release"
         defines { "NDEBUG" }
         optimize "On"
+end
+
+project "Tutorial 16 - Frustum Culling"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
+    
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 16 - Frustum Culling/*.h",
+            "Source/Tutorial 16 - Frustum Culling/*.cpp"
+        }
+
+    debugdir "./"
+
+    includedirs  { "Source/Framework",  "Source/Tutorial 16 - Frustum Culling" }
+
+    setup_project()
+
+project "Tutorial 17 - Multitexturing"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
+    
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 17 - Multitexturing/*.h",
+            "Source/Tutorial 17 - Multitexturing/*.cpp"
+        }
+
+    debugdir "./"
+    
+    includedirs  { "Source/Framework",  "Source/Tutorial 17 - Multitexturing" }
+
+    setup_project()
+    
 
 group "Tools"
 
