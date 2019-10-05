@@ -70,6 +70,27 @@ project "Tutorial 17 - Multitexturing"
     includedirs  { "Source/Framework",  "Source/Tutorial 17 - Multitexturing" }
 
     setup_project()
+	
+project "Tutorial 18 - Light Maps"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
+    
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 18 - Light Maps/*.h",
+            "Source/Tutorial 18 - Light Maps/*.cpp"
+        }
+
+    debugdir "./"
+    
+    includedirs  { "Source/Framework",  "Source/Tutorial 17 - Multitexturing" }
+
+    setup_project()
     
 
 group "Tools"
