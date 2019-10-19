@@ -4,6 +4,7 @@ TextureArrayClass::TextureArrayClass()
 {
 	m_textures[0] = nullptr;
 	m_textures[1] = nullptr;
+	m_textures[2] = nullptr;
 }
 
 TextureArrayClass::~TextureArrayClass()
@@ -11,7 +12,7 @@ TextureArrayClass::~TextureArrayClass()
 
 }
 
-bool TextureArrayClass::Initialize(ID3D11Device* device, WCHAR* textureFile1, WCHAR* textureFile2)
+bool TextureArrayClass::Initialize(ID3D11Device* device, WCHAR* textureFile1, WCHAR* textureFile2, WCHAR* textureFile3)
 {
 	HRESULT result;
 
@@ -27,6 +28,15 @@ bool TextureArrayClass::Initialize(ID3D11Device* device, WCHAR* textureFile1, WC
 	if (FAILED(result))
 	{
 		return false;
+	}
+
+	if (textureFile3)
+	{
+		result = D3DX11CreateShaderResourceViewFromFile(device, textureFile3, NULL, NULL, &m_textures[2], NULL);
+		if (FAILED(result))
+		{
+			return false;
+		}
 	}
 
 	return true;
@@ -45,6 +55,12 @@ void TextureArrayClass::Shutdown()
 	{
 		m_textures[1]->Release();
 		m_textures[1] = nullptr;
+	}
+
+	if (m_textures[2])
+	{
+		m_textures[2]->Release();
+		m_textures[2] = nullptr;
 	}
 }
 

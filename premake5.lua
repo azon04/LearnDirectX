@@ -88,7 +88,28 @@ project "Tutorial 18 - Light Maps"
 
     debugdir "./"
     
-    includedirs  { "Source/Framework",  "Source/Tutorial 17 - Multitexturing" }
+    includedirs  { "Source/Framework",  "Source/Tutorial 18 - Light Maps" }
+
+    setup_project()
+
+project "Tutorial 19 - Alpha Mapping"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
+    
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 19 - Alpha Mapping/*.h",
+            "Source/Tutorial 19 - Alpha Mapping/*.cpp"
+        }
+
+    debugdir "./"
+    
+    includedirs  { "Source/Framework", "Source/Tutorial 19 - Alpha Mapping" }
 
     setup_project()
     

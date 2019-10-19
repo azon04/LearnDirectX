@@ -11,13 +11,13 @@ public:
 	TextureArrayClass();
 	~TextureArrayClass();
 
-	bool Initialize(ID3D11Device* device, WCHAR* textureFile1, WCHAR* textureFile2);
+	bool Initialize(ID3D11Device* device, WCHAR* textureFile1, WCHAR* textureFile2, WCHAR* textureFile3 = nullptr);
 	void Shutdown();
 
 	ID3D11ShaderResourceView** GetTextureArray();
 
 private:
-	ID3D11ShaderResourceView* m_textures[2];
+	ID3D11ShaderResourceView* m_textures[3];
 };
 
 #endif // !_TEXTUREARRAYCLASS_H_

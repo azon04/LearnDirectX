@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{DD376B17-49ED-E30C-D2E1-DDE33E96DA10}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ObjParser", "Projects\vs2017\Tools\ObjParser.vcxproj", "{0D850CF7-79EF-C06D-C22D-72132ED79EC2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 16 - Frustum Culling", "Projects\vs2017\DirectXTutorial\Tutorial 16 - Frustum Culling.vcxproj", "{F1049A16-5D1D-8140-26CA-10DA92A115DA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 17 - Multitexturing", "Projects\vs2017\DirectXTutorial\Tutorial 17 - Multitexturing.vcxproj", "{036DDF8A-EF27-CF36-98DF-4781847919C7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 18 - Light Maps", "Projects\vs2017\DirectXTutorial\Tutorial 18 - Light Maps.vcxproj", "{384F61C7-2474-B047-4DBF-95D73943AF65}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 19 - Alpha Mapping", "Projects\vs2017\DirectXTutorial\Tutorial 19 - Alpha Mapping.vcxproj", "{225AD68A-8E67-0471-174E-005C835AD027}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D850CF7-79EF-C06D-C22D-72132ED79EC2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0D850CF7-79EF-C06D-C22D-72132ED79EC2}.Debug|Win32.Build.0 = Debug|Win32
+		{0D850CF7-79EF-C06D-C22D-72132ED79EC2}.Release|Win32.ActiveCfg = Release|Win32
+		{0D850CF7-79EF-C06D-C22D-72132ED79EC2}.Release|Win32.Build.0 = Release|Win32
+		{F1049A16-5D1D-8140-26CA-10DA92A115DA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F1049A16-5D1D-8140-26CA-10DA92A115DA}.Debug|Win32.Build.0 = Debug|Win32
+		{F1049A16-5D1D-8140-26CA-10DA92A115DA}.Release|Win32.ActiveCfg = Release|Win32
+		{F1049A16-5D1D-8140-26CA-10DA92A115DA}.Release|Win32.Build.0 = Release|Win32
+		{036DDF8A-EF27-CF36-98DF-4781847919C7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{036DDF8A-EF27-CF36-98DF-4781847919C7}.Debug|Win32.Build.0 = Debug|Win32
+		{036DDF8A-EF27-CF36-98DF-4781847919C7}.Release|Win32.ActiveCfg = Release|Win32
+		{036DDF8A-EF27-CF36-98DF-4781847919C7}.Release|Win32.Build.0 = Release|Win32
+		{384F61C7-2474-B047-4DBF-95D73943AF65}.Debug|Win32.ActiveCfg = Debug|Win32
+		{384F61C7-2474-B047-4DBF-95D73943AF65}.Debug|Win32.Build.0 = Debug|Win32
+		{384F61C7-2474-B047-4DBF-95D73943AF65}.Release|Win32.ActiveCfg = Release|Win32
+		{384F61C7-2474-B047-4DBF-95D73943AF65}.Release|Win32.Build.0 = Release|Win32
+		{225AD68A-8E67-0471-174E-005C835AD027}.Debug|Win32.ActiveCfg = Debug|Win32
+		{225AD68A-8E67-0471-174E-005C835AD027}.Debug|Win32.Build.0 = Debug|Win32
+		{225AD68A-8E67-0471-174E-005C835AD027}.Release|Win32.ActiveCfg = Release|Win32
+		{225AD68A-8E67-0471-174E-005C835AD027}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0D850CF7-79EF-C06D-C22D-72132ED79EC2} = {DD376B17-49ED-E30C-D2E1-DDE33E96DA10}
+	EndGlobalSection
+EndGlobal
