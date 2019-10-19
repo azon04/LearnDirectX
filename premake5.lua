@@ -112,7 +112,27 @@ project "Tutorial 19 - Alpha Mapping"
     includedirs  { "Source/Framework", "Source/Tutorial 19 - Alpha Mapping" }
 
     setup_project()
+
+project "Tutorial 20 - Bump Map"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
     
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 20 - Bump Map/*.h",
+            "Source/Tutorial 20 - Bump Map/*.cpp"
+        }
+
+    debugdir "./"
+    
+    includedirs  { "Source/Framework", "Source/Tutorial 20 - Bump Map" }
+
+    setup_project()
 
 group "Tools"
 

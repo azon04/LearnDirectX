@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 18 - Light Maps", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 19 - Alpha Mapping", "Projects\vs2017\DirectXTutorial\Tutorial 19 - Alpha Mapping.vcxproj", "{225AD68A-8E67-0471-174E-005C835AD027}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 20 - Bump Map", "Projects\vs2017\DirectXTutorial\Tutorial 20 - Bump Map.vcxproj", "{DA374A13-C631-7365-AF9E-09769B37D9D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +41,10 @@ Global
 		{225AD68A-8E67-0471-174E-005C835AD027}.Debug|Win32.Build.0 = Debug|Win32
 		{225AD68A-8E67-0471-174E-005C835AD027}.Release|Win32.ActiveCfg = Release|Win32
 		{225AD68A-8E67-0471-174E-005C835AD027}.Release|Win32.Build.0 = Release|Win32
+		{DA374A13-C631-7365-AF9E-09769B37D9D1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DA374A13-C631-7365-AF9E-09769B37D9D1}.Debug|Win32.Build.0 = Debug|Win32
+		{DA374A13-C631-7365-AF9E-09769B37D9D1}.Release|Win32.ActiveCfg = Release|Win32
+		{DA374A13-C631-7365-AF9E-09769B37D9D1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
