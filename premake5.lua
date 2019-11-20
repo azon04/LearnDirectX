@@ -134,6 +134,27 @@ project "Tutorial 20 - Bump Map"
 
     setup_project()
 
+project "Tutorial 21 - Specular Map"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
+    
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 21 - Specular Map/*.h",
+            "Source/Tutorial 21 - Specular Map/*.cpp"
+        }
+
+    debugdir "./"
+    
+    includedirs  { "Source/Framework", "Source/Tutorial 21 - Specular Map" }
+
+    setup_project()
+
 group "Tools"
 
 project "ObjParser"
