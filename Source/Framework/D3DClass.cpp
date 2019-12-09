@@ -569,3 +569,14 @@ void D3DClass::TurnOffAlphaBlending()
 	// Turn on the alpha blending
 	m_deviceContext->OMSetBlendState(m_alphaDisableBlendingState, blendFactor, 0xffffffff);
 }
+
+ID3D11DepthStencilView* D3DClass::GetDepthStencilView()
+{
+	return m_depthStencilView;
+}
+
+void D3DClass::SetBackBufferRenderTarget()
+{
+	// Bind the render target vuew and depth stencil buffer to the output render pipeline
+	m_deviceContext->OMSetRenderTargets(1, &m_renderTargetView, m_depthStencilView);
+}

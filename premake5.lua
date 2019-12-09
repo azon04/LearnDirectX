@@ -155,6 +155,27 @@ project "Tutorial 21 - Specular Map"
 
     setup_project()
 
+project "Tutorial 22 - Render to Texture"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
+    
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 22 - Render to Texture/*.h",
+            "Source/Tutorial 22 - Render to Texture/*.cpp"
+        }
+
+    debugdir "./"
+    
+    includedirs  { "Source/Framework", "Source/Tutorial 22 - Render to Texture" }
+
+    setup_project()
+
 group "Tools"
 
 project "ObjParser"
