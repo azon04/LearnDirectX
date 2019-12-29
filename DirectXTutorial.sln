@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 21 - Specular Map"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 22 - Render to Texture", "Projects\vs2017\DirectXTutorial\Tutorial 22 - Render to Texture.vcxproj", "{BE176EF1-2AFB-7C31-33FE-AA6D9F604382}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 23 - Fog", "Projects\vs2017\DirectXTutorial\Tutorial 23 - Fog.vcxproj", "{C7F51DE9-330C-1C7F-7C83-A7A0E8D8EC06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -57,6 +59,10 @@ Global
 		{BE176EF1-2AFB-7C31-33FE-AA6D9F604382}.Debug|Win32.Build.0 = Debug|Win32
 		{BE176EF1-2AFB-7C31-33FE-AA6D9F604382}.Release|Win32.ActiveCfg = Release|Win32
 		{BE176EF1-2AFB-7C31-33FE-AA6D9F604382}.Release|Win32.Build.0 = Release|Win32
+		{C7F51DE9-330C-1C7F-7C83-A7A0E8D8EC06}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C7F51DE9-330C-1C7F-7C83-A7A0E8D8EC06}.Debug|Win32.Build.0 = Debug|Win32
+		{C7F51DE9-330C-1C7F-7C83-A7A0E8D8EC06}.Release|Win32.ActiveCfg = Release|Win32
+		{C7F51DE9-330C-1C7F-7C83-A7A0E8D8EC06}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

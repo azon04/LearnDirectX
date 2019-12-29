@@ -176,6 +176,27 @@ project "Tutorial 22 - Render to Texture"
 
     setup_project()
 
+project "Tutorial 23 - Fog"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
+    
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 23 - Fog/*.h",
+            "Source/Tutorial 23 - Fog/*.cpp"
+        }
+
+    debugdir "./"
+    
+    includedirs  { "Source/Framework", "Source/Tutorial 23 - Fog" }
+
+    setup_project()
+
 group "Tools"
 
 project "ObjParser"
