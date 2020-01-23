@@ -197,6 +197,27 @@ project "Tutorial 23 - Fog"
 
     setup_project()
 
+project "Tutorial 24 - Clipping Planes"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
+    
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 24 - Clipping Planes/*.h",
+            "Source/Tutorial 24 - Clipping Planes/*.cpp"
+        }
+
+    debugdir "./"
+    
+    includedirs  { "Source/Framework", "Source/Tutorial 24 - Clipping Planes" }
+
+    setup_project()
+
 group "Tools"
 
 project "ObjParser"
