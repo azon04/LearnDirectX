@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 23 - Fog", "Projec
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 24 - Clipping Planes", "Projects\vs2017\DirectXTutorial\Tutorial 24 - Clipping Planes.vcxproj", "{C5F0A7C0-3109-8FEA-FAB5-1E84668D2384}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 25 - Texture Transition", "Projects\vs2017\DirectXTutorial\Tutorial 25 - Texture Transition.vcxproj", "{C9228EAF-B573-79F1-DED7-67B3CA870C5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -69,6 +71,10 @@ Global
 		{C5F0A7C0-3109-8FEA-FAB5-1E84668D2384}.Debug|Win32.Build.0 = Debug|Win32
 		{C5F0A7C0-3109-8FEA-FAB5-1E84668D2384}.Release|Win32.ActiveCfg = Release|Win32
 		{C5F0A7C0-3109-8FEA-FAB5-1E84668D2384}.Release|Win32.Build.0 = Release|Win32
+		{C9228EAF-B573-79F1-DED7-67B3CA870C5B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C9228EAF-B573-79F1-DED7-67B3CA870C5B}.Debug|Win32.Build.0 = Debug|Win32
+		{C9228EAF-B573-79F1-DED7-67B3CA870C5B}.Release|Win32.ActiveCfg = Release|Win32
+		{C9228EAF-B573-79F1-DED7-67B3CA870C5B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
