@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 24 - Clipping Plan
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 25 - Texture Transition", "Projects\vs2017\DirectXTutorial\Tutorial 25 - Texture Transition.vcxproj", "{C9228EAF-B573-79F1-DED7-67B3CA870C5B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tutorial 26 - Transparency", "Projects\vs2017\DirectXTutorial\Tutorial 26 - Transparency.vcxproj", "{6801B0CB-5411-5C9C-BDCA-C0BAA9F94A35}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -75,6 +77,10 @@ Global
 		{C9228EAF-B573-79F1-DED7-67B3CA870C5B}.Debug|Win32.Build.0 = Debug|Win32
 		{C9228EAF-B573-79F1-DED7-67B3CA870C5B}.Release|Win32.ActiveCfg = Release|Win32
 		{C9228EAF-B573-79F1-DED7-67B3CA870C5B}.Release|Win32.Build.0 = Release|Win32
+		{6801B0CB-5411-5C9C-BDCA-C0BAA9F94A35}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6801B0CB-5411-5C9C-BDCA-C0BAA9F94A35}.Debug|Win32.Build.0 = Debug|Win32
+		{6801B0CB-5411-5C9C-BDCA-C0BAA9F94A35}.Release|Win32.ActiveCfg = Release|Win32
+		{6801B0CB-5411-5C9C-BDCA-C0BAA9F94A35}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

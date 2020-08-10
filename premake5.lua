@@ -239,6 +239,27 @@ project "Tutorial 25 - Texture Transition"
 
     setup_project()
 
+project "Tutorial 26 - Transparency"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
+    
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 26 - Transparency/*.h",
+            "Source/Tutorial 26 - Transparency/*.cpp"
+        }
+
+    debugdir "./"
+    
+    includedirs  { "Source/Framework", "Source/Tutorial 26 - Transparency" }
+
+    setup_project()
+
 group "Tools"
 
 project "ObjParser"
