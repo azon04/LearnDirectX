@@ -260,6 +260,27 @@ project "Tutorial 26 - Transparency"
 
     setup_project()
 
+project "Tutorial 27 - Reflection"
+    location ("Projects/".. _ACTION .."/DirectXTutorial")
+    kind "WindowedApp"
+    language "C++"
+    
+    targetdir "Binaries/%{cfg.buildcfg}"
+    
+    files { 
+            "Source/Main.cpp",
+            "Source/Framework/*.h",
+            "Source/Framework/*.cpp",
+            "Source/Tutorial 27 - Reflection/*.h",
+            "Source/Tutorial 27 - Reflection/*.cpp"
+        }
+
+    debugdir "./"
+    
+    includedirs  { "Source/Framework", "Source/Tutorial 27 - Reflection" }
+
+    setup_project()
+
 group "Tools"
 
 project "ObjParser"
